@@ -1,0 +1,132 @@
+.header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0px;
+}
+
+.pokedex-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    grid-gap: 10px;
+    padding: 0 10px;
+}
+
+.pokemon-card {
+    display: flex;
+    box-shadow: 4px 4px 4px rgba(0, 0, 0, 0.25);
+    border-radius: 3px;
+}
+
+.pokemon-img {
+    background: rgb(243,243,243);
+background: radial-gradient(circle, rgba(243,243,243,1) 0%, rgba(209,209,209,1) 0%, rgba(243,243,243,1) 100%);
+}
+
+.pokemon-type {
+    display: flex;
+}
+
+.pokemon-type-text {
+    margin-right: 10px;
+    text-transform: capitalize;
+}
+
+.pokemon-type-text:last-of-type {
+    margin-right: 0;
+}
+
+.card-body {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    padding: 10px;
+    flex: 1;
+}
+
+.card-top {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.card-top h3 {
+    text-transform: capitalize;
+}
+
+.card-bottom {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.pagination {
+    display: flex;
+    align-items: center;
+}
+.pagination button {
+    color: black;
+    background-color: #f3f3f3;
+    outline: none;
+    border-radius: 10px;
+    border: 1px solid black;
+}
+
+.pagination button:first-of-type {
+    margin-right: 5px;
+}
+
+.pagination button:last-of-type {
+    margin-left: 5px;
+}
+
+.pagination button:hover {
+    color: red;
+    transform: scale(1.1);
+    outline: none;
+    border-radius: 10px;
+    border: 1px solid red;
+}
+
+.loader-text {
+    display: block;
+    text-align: center;
+    margin-top: 130px;
+}
+
+.loader-animation {
+    display: flex;
+    justify-content: center;
+    align-self: center;
+    margin: 0 auto;
+}
+
+
+.loader-animation > div {
+    width: 1.5rem;
+    height: 1.5rem;
+    background-color: black;
+    margin: 3rem .5rem;
+    border-radius: 50%;
+    animation: loader-animation .6s infinite alternate;
+}
+
+@keyframes loader-animation {
+    to{
+        opacity: .1;
+        transform: translate3d(0, -1rem, 0)
+    }
+}
+
+.loader-animation > div:nth-child(2) {
+    animation-delay: .2s;
+}
+
+.loader-animation > div:nth-child(3) {
+    animation-delay: .4s;
+}
+
+/* MOBILE */
+.pokedex-grid {
+    grid-template-columns: 1fr;
+}
