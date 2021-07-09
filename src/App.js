@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useCallback, useEffect, useState } from 'react';
 import { Navbar } from './components/Navbar/Navbar';
 import { Pokedex } from './components/Pokedex/Pokedex';
 import { Searchbar } from './components/Searchbar/Searchbar';
@@ -19,9 +19,10 @@ function App() {
   const [loading, setLoading] = useState(true);
   const [favorites, setFavorites] = useState([]);
   const [notFound, setNotFound] = useState(false);
+  const [searching, setSearching] = useState(false); 
 
   //fetchPokemons devuelve un arreglo con los datos de los 10 primeros pokemons.
-  const fetchPokemons = async () => {
+  const fetchPokemons = useCallback(async () => {
     try {
       setLoading(true);
       //si estamos en la página 0, nuestro offset sería 0*25 = 0, si estamos en la 1, sería 25.
@@ -37,7 +38,7 @@ function App() {
     } catch(error){
       console.log(error);
     }
-  }
+  },[page]);
 
   const loadFavoritePokemons = () => {
     const pokemons = JSON.parse(window.localStorage.getItem(localStorageKey)) || [];
@@ -50,8 +51,10 @@ function App() {
 
 //Cada vez que el valor de la página(page) cambie, vamos a hacer las peticiones http de nuevo.
   useEffect( () => {
-    fetchPokemons();
-  },[page]);
+    if(!searching) {
+      fetchPokemons();
+    }
+  },[ fetchPokemons, page]);
 
   const updateFavoritePokemon = (name) => {
     const updated = [...favorites];
@@ -66,10 +69,11 @@ function App() {
       JSON.stringify(updated));
   }
 
-  const onSearch = async(pokemon) => {
+  const onSearch = useCallback (async(pokemon) => {
     if(!pokemon) {
       return fetchPokemons();
     }
+    setSearching(true);
     setLoading(true);
     setNotFound(false);
     const result = await searchPokemon(pokemon);
@@ -83,7 +87,8 @@ function App() {
       setTotal(0);
     }
     setLoading(false);
-  }
+    setSearching(false);
+  },[ setNotFound, setTotal ]);
 
   return (
     <FavoriteProvider 

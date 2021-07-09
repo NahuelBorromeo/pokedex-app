@@ -1,10 +1,9 @@
 import React, { useState } from 'react';
-import { searchPokemon } from '../../api';
 
 import './Searchbar.css';
 
 //Creamos el componente Searchbar el cual tendrá el input para buscar el pokemon que nosotros queremos
-export const Searchbar = ({onSearch}) => {
+export const Searchbar = React.memo(({onSearch}) => {
     
     //Declaramos el estado del search el cuál nos servira para capturar el evento onChange del input
     const [search, setSearch] = useState('');
@@ -23,7 +22,6 @@ export const Searchbar = ({onSearch}) => {
         onSearch(search.trim().toLowerCase())
     }
 
-
     return (
         <div className="searchbar-container">
             <form className="searchbar" onSubmit={ handleClick }>
@@ -39,4 +37,4 @@ export const Searchbar = ({onSearch}) => {
             </div>
         </div>
     )
-}
+})

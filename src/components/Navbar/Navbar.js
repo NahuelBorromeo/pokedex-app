@@ -8,7 +8,7 @@ import './Navbar.css'
 export const Navbar = () => {
     
     const { favoritePokemons } = useContext(FavoriteContext)
-
+    
     return (
         <nav>
             <div />
